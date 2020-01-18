@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import Hello from './Hello';
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  // componentDidMount
-  useEffect(() => {
-    console.log('render');
-  }, []);
-
+  const [show, setShow] = useState(true);
   return (
     <div>
-      <input
-        type="email"
-        name="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+      {show ? <Hello /> : null}
+      <br />
+      <button onClick={() => setShow(value => !value)}>Show / Hide</button>
     </div>
   );
 }
