@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import Hello from './Hello';
+import React, { useState, useEffect } from 'react';
 
 function App() {
-  const [show, setShow] = useState(true);
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    console.log('mounted / render');
+    return () => {
+      console.log('cleaned-up')
+    }
+  }, [email]);
   return (
     <div>
-      {show ? <Hello /> : null}
-      <br />
-      <button onClick={() => setShow(value => !value)}>Show / Hide</button>
+      <input
+        value={email}
+        type="email"
+        onChange={e => setEmail(e.target.value)}
+      />
     </div>
   );
 }
