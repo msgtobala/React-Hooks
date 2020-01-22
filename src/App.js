@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+import { useFetch } from './useFetch';
 
 function App() {
-  const [email, setEmail] = useState('');
-  useEffect(() => {
-    console.log('mount1');
-  });
-  useEffect(() => {
-    console.log('mount2');
-  });
+  const [url, setUrl] = useState(1);
+  const { data, loading } = useFetch(`http://numbersapi.com/${url}/trivia`);
+  const getData = e => {
+    if (e.target.value) {
+      setUrl(e.target.value);
+    }
+  };
   return (
     <div>
       <input
-        value={email}
         type="email"
-        onChange={e => setEmail(e.target.value)}
+        value={url}
+        onChange={e => getData(e)}
+        style={{ display: 'block' }}
       />
+      {loading ? <div>Data is Loading</div> : data}
     </div>
   );
 }
